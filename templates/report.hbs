@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      padding: 40px; 
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    .header {
+      text-align: center;
+      border-bottom: 3px solid #e74c3c;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .logo {
+      color: #e74c3c;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    h1 { 
+      color: #2c3e50; 
+      font-size: 28px;
+      margin: 0;
+      font-weight: bold;
+    }
+    
+    h2 { 
+      color: #2c3e50; 
+      font-size: 20px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+    }
+    
+    h3 { 
+      color: #2c3e50; 
+      font-size: 16px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    
+    .section { 
+      margin-bottom: 25px; 
+      page-break-inside: avoid;
+    }
+    
+    .metadata {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-left: 4px solid #3498db;
+      margin-bottom: 20px;
+    }
+    
+    .metadata table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .metadata td {
+      padding: 5px 10px;
+      border: none;
+    }
+    
+    .metadata .label {
+      font-weight: bold;
+      width: 150px;
+      color: #2c3e50;
+    }
+    
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin: 15px 0;
+      font-size: 12px;
+    }
+    
+    th, td { 
+      border: 1px solid #ddd; 
+      padding: 8px; 
+      text-align: left;
+      vertical-align: top;
+    }
+    
+    th { 
+      background-color: #3498db; 
+      color: white; 
+      font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    
+    .severity-critical { background-color: #e74c3c !important; color: white; }
+    .severity-high { background-color: #f39c12 !important; color: white; }
+    .severity-medium { background-color: #f1c40f !important; color: black; }
+    .severity-low { background-color: #2ecc71 !important; color: white; }
+    
+    .vulnerability-analysis {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    
+    .vulnerability-title {
+      font-weight: bold;
+      color: #e74c3c;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    
+    .formatted-analysis {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    
+    .formatted-analysis h4 {
+      color: #e74c3c !important;
+      font-weight: bold !important;
+      margin: 15px 0 10px 0 !important;
+      font-size: 14px !important;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+    
+    .dependency-item {
+      background-color: #f8f9fa;
+      padding: 10px;
+      margin: 8px 0;
+      border-left: 4px solid #3498db;
+      border-radius: 3px;
+    }
+    
+    .vulnerability-item {
+      background-color: #fff5f5;
+      padding: 10px;
+      margin: 8px 0;
+      border-left: 4px solid #e74c3c;
+      border-radius: 3px;
+    }
+    
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 10px;
+      color: #666;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+    }
+    
+    .page-info {
+      text-align: right;
+      font-size: 10px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    
+    .executive-summary {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    
+    ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    
+    .finding-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+      background-color: #f8f9fa;
+    }
+    
+    .page-break {
+      page-break-before: always;
+    }
+    
+    .toc-item {
+      margin: 5px 0;
+      padding: 5px 0;
+      border-bottom: 1px dotted #ccc;
+    }
+    
+    .toc-title {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    
+    .toc-page {
+      float: right;
+      color: #666;
+    }
+    
+    .preface {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 5px;
+      margin: 20px 0;
+      font-style: italic;
+    }
+    
+    .summary-box {
+      background-color: #e8f5e8;
+      border: 2px solid #27ae60;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
+    .summary-metric {
+      display: inline-block;
+      margin: 10px 20px 10px 0;
+      padding: 10px 15px;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Title Page -->
+  <div class="header">
+    <div class="logo">CodeShuriken</div>
+    <h1>Security Assessment Report</h1>
+    <div style="margin-top: 30px; font-size: 18px; color: #666;">
+      <strong>Repository:</strong> {{repo_url}}<br>
+      <strong>Generated:</strong> {{created_at}}<br>
+      <strong>Report ID:</strong> {{report_id}}
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="page-break">
+    <h2>Table of Contents</h2>
+    <div class="toc-item">
+      <span class="toc-title">Preface</span>
+      <span class="toc-page">3</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-title">Executive Summary</span>
+      <span class="toc-page">4</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-title">1. Repository Information</span>
+      <span class="toc-page">5</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-title">&nbsp;&nbsp;1.1 Language Distribution</span>
+      <span class="toc-page">5</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-title">&nbsp;&nbsp;1.2 File Types Analysis</span>
+      <span class="toc-page">6</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-title">2. Security Analysis & Vulnerability Assessment</span>
+      <span class="toc-page">7</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-title">3. Code Metrics</span>
+      <span class="toc-page">8</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-title">4. Recommendations</span>
+      <span class="toc-page">9</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-title">5. Summary</span>
+      <span class="toc-page">10</span>
+    </div>
+  </div>
+
+  <!-- Preface -->
+  <div class="page-break">
+    <h2>Preface</h2>
+    <div class="preface">
+      <p><strong>About This Report</strong></p>
+      <p>This automated security assessment report has been generated to provide comprehensive insights into the security posture of your software repository. The analysis includes dependency vulnerabilities, code quality metrics, and actionable security recommendations.</p>
+      
+      <p><strong>Methodology</strong></p>
+      <p>Our security assessment employs multiple scanning techniques including:</p>
+      <ul>
+        <li>Static code analysis for vulnerability detection</li>
+        <li>Dependency vulnerability scanning against known CVE databases</li>
+        <li>Software Bill of Materials (SBOM) generation and analysis</li>
+        <li>Code quality and security best practices evaluation</li>
+      </ul>
+      
+      <p><strong>Scope and Limitations</strong></p>
+      <p>This report covers static analysis findings and known vulnerabilities in dependencies. It does not include dynamic testing, manual code review findings, or infrastructure security assessments. The analysis is based on the repository state at the time of scanning.</p>
+      
+      <p><strong>How to Use This Report</strong></p>
+      <p>Review the Executive Summary for high-level findings, then proceed to detailed sections. Prioritize critical and high-severity vulnerabilities for immediate remediation. Use the recommendations section to improve your overall security posture.</p>
+    </div>
+  </div>
+
+  <div class="page-info page-break">
+    Status: {{status}}<br>
+    Scan Date: {{created_at}}
+  </div>
+
+  <div class="section">
+    <h2>Executive Summary</h2>
+    <div class="executive-summary">
+      <p>This report was prepared by automated security scanning to review aspects of the security and integrity of the repository <strong>{{repo_url}}</strong>.</p>
+      
+      <p>This report identifies potential security weaknesses and vulnerabilities found through static code review and searches of public vulnerability sources. The analysis focused particularly on dependency vulnerabilities that could be exploited to alter system behavior, access critical data, or conduct denial of service attacks.</p>
+      
+      <div class="metadata">
+        <table>
+          <tr>
+            <td class="label">Scan Type:</td>
+            <td>{{scan_type}}</td>
+            <td class="label">Status:</td>
+            <td>{{status}}</td>
+          </tr>
+          <tr>
+            <td class="label">Repository:</td>
+            <td colspan="3">{{repo_url}}</td>
+          </tr>
+          <tr>
+            <td class="label">Branch:</td>
+            <td>{{branch}}</td>
+            <td class="label">Completed:</td>
+            <td>{{completed_at}}</td>
+          </tr>
+        </table>
+      </div>
+      
+      <p><strong>Key Findings Summary:</strong></p>
+      <ul>
+        <li>Repository contains {{progress.total_files}} files with {{progress.processed_files}} successfully processed</li>
+        <li>Scan completion rate: {{progress.percentage}}%</li>
+        <li><strong>Total vulnerabilities found: {{vulnerabilities.total}}</strong>
+          <ul>
+            <li>Critical: {{vulnerabilities.critical}}</li>
+            <li>High: {{vulnerabilities.high}}</li>
+            <li>Medium: {{vulnerabilities.medium}}</li>
+            <li>Low: {{vulnerabilities.low}}</li>
+          </ul>
+        </li>
+        <li>Primary languages identified: 
+          {{#if repository_info.languages}}
+            {{#each repository_info.languages}}{{@key}} ({{this}}%){{#unless @last}}, {{/unless}}{{/each}}
+          {{else}}
+            Not available
+          {{/if}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="metadata">
+    <table>
+      <tr>
+        <td class="label">Last update:</td>
+        <td>{{created_at}}</td>
+        <td class="label">Status:</td>
+        <td>{{status}}</td>
+      </tr>
+      <tr>
+        <td class="label">Version:</td>
+        <td>1.0</td>
+        <td class="label">Repository:</td>
+        <td>{{repo_url}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>1 Repository Information</h2>
+    
+    <h3>1.1 Language Distribution</h3>
+    {{#if repository_info.languages}}
+    <table>
+      <thead>
+        <tr>
+          <th>Language</th>
+          <th>Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each repository_info.languages}}
+        <tr>
+          <td>{{@key}}</td>
+          <td>{{this}}%</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+
+    <h3>1.2 File Types Analysis</h3>
+    {{#if repository_info.file_types}}
+    <table>
+      <thead>
+        <tr>
+          <th>File Extension</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each repository_info.file_types}}
+        <tr>
+          <td>{{@key}}</td>
+          <td>{{this}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+  </div>
+
+  <div class="section">
+    <h2>2 Security Analysis & Vulnerability Assessment</h2>
+    
+    {{#each scan_results}}
+    <div class="section">
+      <h3>2.{{@index}} {{@key}} Analysis</h3>
+      
+      <div class="vulnerability-analysis">
+        <div class="vulnerability-title">File: {{file_path}}</div>
+        <div class="vulnerability-title">Type: {{file_type}}</div>
+        
+        {{#if analysis}}
+        <div class="formatted-analysis">
+          {{#each (splitAnalysis analysis)}}
+            {{#if this.isHeading}}
+              <h4 style="color: #e74c3c; font-weight: bold; margin: 15px 0 10px 0; font-size: 14px;">{{this.text}}</h4>
+            {{else if this.isBullet}}
+              <div style="margin-left: 20px; margin-bottom: 8px;">
+                <strong style="color: #2c3e50;">{{this.label}}</strong> {{this.text}}
+              </div>
+            {{else if this.isSubBullet}}
+              <div style="margin-left: 40px; margin-bottom: 5px; font-size: 12px;">
+                • {{this.text}}
+              </div>
+            {{else if this.isSeverity}}
+              <div style="margin-left: 20px; margin-bottom: 8px;">
+                <strong style="color: #2c3e50;">Severity:</strong> 
+                <span class="severity-{{this.level}}" style="padding: 2px 8px; border-radius: 3px; font-weight: bold;">{{this.text}}</span>
+              </div>
+            {{else if this.isRecommendation}}
+              <div style="background-color: #f8f9fa; padding: 10px; margin: 10px 0; border-left: 4px solid #3498db; border-radius: 3px;">
+                <strong style="color: #2c3e50;">Remediation:</strong> {{this.text}}
+              </div>
+            {{else}}
+              <p style="margin-bottom: 10px; line-height: 1.5;">{{this.text}}</p>
+            {{/if}}
+          {{/each}}
+        </div>
+        {{else}}
+        <p>No detailed analysis available for this file.</p>
+        {{/if}}
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  {{#if repository_info.total_lines}}
+  <div class="section">
+    <h2>3 Code Metrics</h2>
+    <div class="metadata">
+      <table>
+        <tr>
+          <td class="label">Total Lines of Code:</td>
+          <td>{{repository_info.total_lines}}</td>
+        </tr>
+        <tr>
+          <td class="label">Files Processed:</td>
+          <td>{{progress.processed_files}}/{{progress.total_files}}</td>
+        </tr>
+        <tr>
+          <td class="label">Completion:</td>
+          <td>{{progress.percentage}}%</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="section">
+    <h2>4 Recommendations</h2>
+    <div class="finding-item">
+      <strong>Immediate Actions Required:</strong>
+      <ul>
+        <li>Review and address all critical and high severity vulnerabilities</li>
+        <li>Update all outdated dependencies to their latest stable versions</li>
+        <li>Implement proper dependency management practices</li>
+      </ul>
+    </div>
+    
+    <div class="finding-item">
+      <strong>Long-term Security Improvements:</strong>
+      <ul>
+        <li>Integrate automated security scanning into CI/CD pipeline</li>
+        <li>Regular security code reviews</li>
+        <li>Monitor security advisories for used dependencies</li>
+        <li>Implement secure coding practices</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>5 Summary</h2>
+    <div class="summary-box">
+      <h3>Assessment Results Overview</h3>
+      <div style="margin: 20px 0;">
+        <span class="summary-metric">Scan Type: {{scan_type}}</span>
+        <span class="summary-metric">Status: {{status}}</span>
+        <span class="summary-metric">Files: {{progress.processed_files}}/{{progress.total_files}}</span>
+        <span class="summary-metric">Progress: {{progress.percentage}}%</span>
+        <span class="summary-metric">Total Vulnerabilities: {{vulnerabilities.total}}</span>
+      </div>
+      
+      <h3>Vulnerability Breakdown</h3>
+      <div style="margin: 15px 0;">
+        <div style="display: inline-block; margin: 5px 10px 5px 0; padding: 8px 12px; background-color: #e74c3c; color: white; border-radius: 3px; font-weight: bold;">
+          Critical: {{vulnerabilities.critical}}
+        </div>
+        <div style="display: inline-block; margin: 5px 10px 5px 0; padding: 8px 12px; background-color: #f39c12; color: white; border-radius: 3px; font-weight: bold;">
+          High: {{vulnerabilities.high}}
+        </div>
+        <div style="display: inline-block; margin: 5px 10px 5px 0; padding: 8px 12px; background-color: #f1c40f; color: white; border-radius: 3px; font-weight: bold;">
+          Medium: {{vulnerabilities.medium}}
+        </div>
+        <div style="display: inline-block; margin: 5px 10px 5px 0; padding: 8px 12px; background-color: #95a5a6; color: white; border-radius: 3px; font-weight: bold;">
+          Low: {{vulnerabilities.low}}
+        </div>
+      </div>
+      
+      <h3>Key Statistics</h3>
+      <div class="metadata">
+        <table>
+          <tr>
+            <td class="label">Repository URL:</td>
+            <td>{{repo_url}}</td>
+          </tr>
+          <tr>
+            <td class="label">Branch Analyzed:</td>
+            <td>{{branch}}</td>
+          </tr>
+          <tr>
+            <td class="label">Scan Started:</td>
+            <td>{{created_at}}</td>
+          </tr>
+          <tr>
+            <td class="label">Scan Completed:</td>
+            <td>{{completed_at}}</td>
+          </tr>
+          {{#if repository_info.total_lines}}
+          <tr>
+            <td class="label">Total Lines of Code:</td>
+            <td>{{repository_info.total_lines}}</td>
+          </tr>
+          {{/if}}
+        </table>
+      </div>
+      
+      <h3>Primary Languages</h3>
+      {{#if repository_info.languages}}
+      <div style="margin: 15px 0;">
+        {{#each repository_info.languages}}
+        <div style="display: inline-block; margin: 5px 10px 5px 0; padding: 5px 10px; background-color: #f39c12; color: white; border-radius: 3px; font-size: 12px;">
+          {{@key}}: {{this}}%
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+      
+      <h3>Next Steps</h3>
+      <div style="background-color: #fff; padding: 15px; border-radius: 5px; margin-top: 20px;">
+        <ol>
+          <li><strong>Immediate:</strong> Address any critical or high-severity vulnerabilities identified</li>
+          <li><strong>Short-term:</strong> Review and update outdated dependencies</li>
+          <li><strong>Long-term:</strong> Implement continuous security monitoring and automated scanning</li>
+          <li><strong>Process:</strong> Integrate security practices into development workflow</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Report generated on {{created_at}}<br>
+    Automated Security Assessment Tool
+  </div>
+</body>
+</html>

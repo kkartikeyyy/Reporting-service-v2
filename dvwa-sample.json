@@ -1,0 +1,21 @@
+{
+  "repository": {
+    "name": "DVWA Test",
+    "url": "https://github.com/digininja/DVWA.git",
+    "branch": "main"
+  },
+  "vulnerabilities": {
+    "total": 844,
+    "critical": 213,
+    "high": 267,
+    "medium": 248,
+    "low": 116,
+    "details": [
+      {
+        "file": "php.ini",
+        "type": "CONFIG",
+        "analysis": "The provided php.ini snippet presents significant security risks due to the settings of allow_url_fopen and allow_url_include. Critical vulnerabilities include Remote File Inclusion (RFI) and potential for complete server compromise."
+      }
+    ]
+  }
+}
